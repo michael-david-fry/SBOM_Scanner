@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sbom-kev-scanner"
+version = "1.0.0"
+description = "Desktop scanner that checks an SBOM's components against the CISA Known Exploited Vulnerabilities (KEV) catalog and produces auditor-grade evidence."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+authors = [{ name = "Infor Government Solutions" }]
+keywords = ["sbom", "kev", "cisa", "vulnerability", "cyclonedx", "spdx", "osv"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: X11 Applications",
+    "Intended Audience :: Information Technology",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+]
+# No third-party runtime dependencies: only the Python standard library
+# (tkinter, urllib, json, subprocess, threading) is used.
+dependencies = []
+
+[project.urls]
+Homepage = "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+
+[project.scripts]
+# Console entry point: launches the GUI. (Also runnable as `python -m sbom_kev`.)
+sbom-kev = "sbom_kev.app:main"
+
+[tool.setuptools]
+# Ship only the importable package. The bundled catalog + updater under
+# sbom_kev/data are shipped as package data (below), not as an importable
+# subpackage, so they are listed here explicitly rather than auto-discovered.
+packages = ["sbom_kev"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+# Bundle the CISA KEV catalog snapshot and the vendored updater with the wheel.
+sbom_kev = ["data/*.json", "data/*.py"]
+
+[tool.setuptools.exclude-package-data]
+# Never ship compiled caches.
+sbom_kev = ["**/__pycache__/*"]

@@ -1,0 +1,20 @@
+# Python build artifacts
+build/
+dist/
+*.egg-info/
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+.verify-venv/
+venv/
+
+# Generated evidence reports
+kev-evidence_*.md
+kev-evidence_*.json
+evidence-sample/
+
+# OS noise
+Thumbs.db
+desktop.ini

@@ -1,0 +1,8 @@
+# SBOM KEV Scanner runtime dependencies.
+#
+# The application intentionally relies only on the Python standard library
+# (tkinter, urllib, json, subprocess, threading). No third-party packages are
+# required to run or test the app.
+#
+# Python 3.10 or newer is required (uses match-free modern typing syntax such
+# as `str | None` and dataclass features).
